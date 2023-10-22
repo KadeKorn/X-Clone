@@ -18,7 +18,9 @@ const RegisterModal = () => {
     if (isLoading) {
       return;
     }
-  },[isLoading, registerModal, loginModal])
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [isLoading, registerModal, loginModal]);
 
   const onSubmit = useCallback(async () => {
     try {
@@ -64,9 +66,11 @@ const RegisterModal = () => {
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
       <p>
-        Already have an account?
-        <span onClick={onToggle}
-         className="text-white cursor-pointer hover:underline">
+        Already have an account?{" "}
+        <span
+          onClick={onToggle}
+          className="text-white cursor-pointer hover:underline"
+        >
           Sign in
         </span>
       </p>
