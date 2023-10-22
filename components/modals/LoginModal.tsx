@@ -3,7 +3,6 @@ import { useCallback, useState } from "react";
 import input from "../input";
 import Modal from "../Modal";
 
-
 const LoginModal = () => {
   const loginModal = useLoginModal();
 
@@ -20,37 +19,37 @@ const LoginModal = () => {
     } catch (error) {
       console.log(error);
     } finally {
-        setIsLoading(false)
+      setIsLoading(false);
     }
   }, [loginModal]);
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
-        <input 
+    <div className="flex flex-col gap-4 ">
+      <input
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         disabled={isLoading}
-        />
-        <input 
+      />
+      <input
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
         value={email}
         disabled={isLoading}
-        />
+      />
     </div>
-  )
+  );
   return (
-    <Modal 
-    disabled={isLoading}
-    isOpen={loginModal.isOpen}
-    title="Login"
-    actionLabel="Sign in"
-    onClose={loginModal.onClose}
-    onSubmit={onSubmit}
-    body={bodyContent}
+    <Modal
+      disabled={isLoading}
+      isOpen={loginModal.isOpen}
+      title="Login"
+      actionLabel="Sign in"
+      onClose={loginModal.onClose}
+      onSubmit={onSubmit}
+      body={bodyContent}
     />
-  )
+  );
 };
 
 export default LoginModal;
