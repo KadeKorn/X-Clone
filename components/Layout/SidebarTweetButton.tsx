@@ -12,7 +12,7 @@ const SidebarTweetButton = () => {
   },[loginModal])
 
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick}> 
       <div
         className="mt-6
        lg:hidden

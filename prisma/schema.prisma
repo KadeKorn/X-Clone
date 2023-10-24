@@ -52,7 +52,7 @@ model Comment {
   postId String @db.ObjectId
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post User @relation(fields: [postId], references: [id], onDelete: Cascade)
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
@@ -60,4 +60,7 @@ model Notification {
   body String
   userId String @db.ObjectId
   createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 }
