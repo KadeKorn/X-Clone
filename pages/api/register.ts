@@ -25,7 +25,7 @@ export default async function handler(
         email,
         username,
         name,
-        hashedPassword  
+        hashedPassword  // Ensure this field is correctly named in your Prisma model
       },
     });
 
