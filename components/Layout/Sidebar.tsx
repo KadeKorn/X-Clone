@@ -23,11 +23,13 @@ const Sidebar = () => {
       label: "Notifications",
       href: "/notifications",
       icon: BsBellFill,
+      auth: true,
     },
     {
       label: "Profile",
       href: "/users/123", // Should be dynamic based on the logged-in user
       icon: FaUser,
+      auth: true,
     },
   ];
 
@@ -37,10 +39,19 @@ const Sidebar = () => {
         <div className="space-y-2 lg:w-[230px]">
           <SidebarLogo />
           {items.map((item) => (
-            <SidebarItem key={item.href} {...item} />
+            <SidebarItem 
+            key={item.href}
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
+            auth={item.auth}  />
           ))}
           {currentUser && (
-            <SidebarItem onClick={() => signOut()} icon={BiLogOut} label="Logout" />
+            <SidebarItem
+              onClick={() => signOut()}
+              icon={BiLogOut}
+              label="Logout"
+            />
           )}
           <SidebarTweetButton />
         </div>
@@ -50,7 +61,6 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
 
 // // Sidebar component
 // import { useRouter } from "next/router";
