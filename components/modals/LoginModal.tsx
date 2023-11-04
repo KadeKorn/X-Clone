@@ -26,30 +26,16 @@ const LoginModal = () => {
     try {
       setIsLoading(true);
 
-      await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-      }).then((result) => {
-        if (result && result.error) {
-          // Handle errors here
-          console.log(result.error);
-          // You might want to show an error message to the user here
-        } else {
-          // Success
-          loginModal.onClose();
-          // You may want to redirect the user or perform some other action
-        }
-      });
+     
+      await signIn()
 
-      // Remove the loginModal.onClose(); from here
+      loginModal.onClose();
     } catch (error) {
-      console.error("An error occurred during sign in:", error);
-      // You might want to show an error message to the user here
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }, [email, password, loginModal, setIsLoading]);
+  }, [loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
