@@ -15,10 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <RegisterModal />
       <LoginModal />
       <Layout>
-        <button onClick={() => toast.success("Test Toast!")}>
-          Trigger Toast
-        </button>
-
         <Component {...pageProps} />
       </Layout>
     </SessionProvider>

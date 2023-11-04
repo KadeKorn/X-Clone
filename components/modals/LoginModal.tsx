@@ -4,6 +4,7 @@ import useRegisterModal from "@/hooks/useRegisterModal";
 
 import Input from "../Input";
 import Modal from "../Modal";
+import { signIn } from "next-auth/react";
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
@@ -25,14 +26,30 @@ const LoginModal = () => {
     try {
       setIsLoading(true);
 
-      //TODO ADD LOG IN
-      loginModal.onClose();
+      await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      }).then((result) => {
+        if (result && result.error) {
+          // Handle errors here
+          console.log(result.error);
+          // You might want to show an error message to the user here
+        } else {
+          // Success
+          loginModal.onClose();
+          // You may want to redirect the user or perform some other action
+        }
+      });
+
+      // Remove the loginModal.onClose(); from here
     } catch (error) {
-      console.log(error);
+      console.error("An error occurred during sign in:", error);
+      // You might want to show an error message to the user here
     } finally {
       setIsLoading(false);
     }
-  }, [loginModal]);
+  }, [email, password, loginModal, setIsLoading]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4 ">
