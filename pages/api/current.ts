@@ -17,3 +17,5 @@ export default async function handler(
     return res.status(400).end();
   }
 }
+
+//current and serverAuth are linked -- serverAuth grabs the user and current then uses it in the try statements
