@@ -18,11 +18,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   const handleClick = useCallback(() => {
     if (onClick) {
       return onClick();
-    }
-    if (href) {
+    } else if (href) {
       router.push(href);
     }
-    router.push(href);
   }, [router, onClick, href]);
   /* Mobile first */
   return (

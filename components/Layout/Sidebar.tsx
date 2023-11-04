@@ -1,3 +1,6 @@
+// Sidebar component
+import { useRouter } from "next/router";
+import { useCallback } from "react";
 import { BsHouseFill, BsBellFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
@@ -9,6 +12,7 @@ import SidebarItem from "./SidebarItem";
 import SidebarTweetButton from "./SidebarTweetButton";
 
 const Sidebar = () => {
+  const router = useRouter();
   const { data: currentUser } = useCurrentUser();
   const items = [
     {
@@ -23,25 +27,30 @@ const Sidebar = () => {
     },
     {
       label: "Profile",
-      href: "/users/123",
+      href: "/users/123", // Should be dynamic based on the logged-in user
       icon: FaUser,
     },
   ];
+
+  const onLogoutClick = useCallback(async () => {
+    try {
+      await signOut({ redirect: false });
+      router.push('/login'); // Or whatever your login route is
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }, [router]);
+
   return (
     <div className="col-span-1 h-full pr-4 md:pr-6">
       <div className="flex flex-col items-end">
         <div className="space-y-2 lg:w-[230px]">
           <SidebarLogo />
           {items.map((item) => (
-            <SidebarItem
-              key={item.href}
-              href={item.href}
-              label={item.label}
-              icon={item.icon}
-            />
+            <SidebarItem key={item.href} {...item} />
           ))}
           {currentUser && (
-            <SidebarItem onClick={() => signOut} icon={BiLogOut} label="Logout" />
+            <SidebarItem onClick={onLogoutClick} icon={BiLogOut} label="Logout" />
           )}
           <SidebarTweetButton />
         </div>

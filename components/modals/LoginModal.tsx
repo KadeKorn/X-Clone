@@ -38,18 +38,21 @@ const LoginModal = () => {
     <div className="flex flex-col gap-4 ">
       <Input
         placeholder="Email"
+        type="email" // It's good practice to specify the type for email inputs
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         disabled={isLoading}
       />
       <Input
         placeholder="Password"
+        type="password" // And for password inputs
         onChange={(e) => setPassword(e.target.value)}
-        value={email}
+        value={password} // This is where the fix is made
         disabled={isLoading}
       />
     </div>
   );
+
   const footerContent = (
     <div className="text-neutral-400 text-center mt-4">
       <p>
