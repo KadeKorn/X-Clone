@@ -1,7 +1,9 @@
+import axios from "axios";
 import useCurrentUser from "@/hooks/useCurrentUser"
 import useEditModal from "@/hooks/useEditModal";
 import useUser from "@/hooks/useUser";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const EditModal = () => {
     const {data: currentUser } = useCurrentUser();
@@ -20,7 +22,32 @@ const EditModal = () => {
         setnName(currentUser?.name);
         setUserName(currentUser?.username);
         setBio(currentUser?.bio)
-    }, [currentUser])
+    }, [currentUser]);
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const onSubmit = useCallback(async () => {
+        try {
+            setIsLoading(true);
+            await axios.patch('/api/edit', {
+                name,
+                username,
+                bio,
+                profileImage,
+                coverImage
+            });
+            mutateFetchedUser();
+
+            toast.success('Updated')
+
+            editModal.onClose(); 
+        } catch (error) {
+            toast.error('Something went wrong')
+        } finally {
+            setIsLoading(false)
+        }
+    }, [name, username, bio, profileImage, coverImage, editModal, mutateFetchedUser])
+
     return (
     <div></div>
   )
