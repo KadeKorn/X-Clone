@@ -12,11 +12,11 @@ const EditModal = () => {
   const { mutate: mutateFetchedUser } = useUser(currentUser?.id);
   const editModal = useEditModal();
 
-  const [profileImage, setProfileImage] = useState();
-  const [coverImage, setCoverImage] = useState();
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
-  const [bio, setBio] = useState();
+  const [profileImage, setProfileImage] = useState('');
+  const [coverImage, setCoverImage] = useState('');
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [bio, setBio] = useState('');
 
   useEffect(() => {
     setProfileImage(currentUser?.profileImage);
