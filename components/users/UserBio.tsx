@@ -74,3 +74,5 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
 };
 
 export default UserBio;
+
+//I am still having trouble with my code connection, so I will come back to this later and recruit some help
